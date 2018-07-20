@@ -37,8 +37,8 @@ public class Gaming {
         }
     }
 
-    public int GAME_H = 30;
-    public int GAME_W = 30;
+    public const int GAME_H = 30;
+    public const int GAME_W = 30;
 
     public const int GAMEMODE_BEGIN = 10;
     public const int GAMEMODE_LINKED = 20;
@@ -89,7 +89,7 @@ public class Gaming {
 
     public Cooder food;
     public int[,] game_map;
-    public int[,] controlMap;
+    // public int[,] controlMap;
     public List<Cooder> snake_li_m;
     public List<Cooder> snake_li_e;
 
@@ -151,6 +151,9 @@ public class Gaming {
                         tmp_li_e.Add(new Cooder(x, y));
                 }
 
+                food.x=_tmpbuff.Read_Byte();
+                food.y=_tmpbuff.Read_Byte();
+
                 game_map = tmp_game_map;
                 snake_li_m = tmp_li_m;
                 snake_li_e = tmp_li_e;
@@ -159,19 +162,20 @@ public class Gaming {
                 game_online_flag = 1;
                 game_sc_mode = _tmpbuff.Read_Byte();
                 game_move_per_ms = _tmpbuff.Read_Int();
-                GAME_H = _tmpbuff.Read_Int();
-                GAME_W = _tmpbuff.Read_Int();
+                // GAME_H = _tmpbuff.Read_Int();
+                // GAME_W = _tmpbuff.Read_Int();
                 game_map = new int[GAME_H, GAME_W];
                 snake_li_m = new List<Cooder>();
                 snake_li_e = new List<Cooder>();
+                food=new Cooder(0,0);
 
 
-                controlMap = new int[GAME_H, GAME_W];
-                for(int i=0;i<GAME_H;++i){
-                    for(int j=0;j<GAME_W;++j){
-                        controlMap[i][j]=_tmpbuff.Read_Byte();
-                    }
-                }
+                // controlMap = new int[GAME_H, GAME_W];
+                // for(int i=0;i<GAME_H;++i){
+                //     for(int j=0;j<GAME_W;++j){
+                //         controlMap[i,j]=_tmpbuff.Read_Byte();
+                //     }
+                // }
                 //Debug.Log("COM_DOWN");
                 break;
             case GAME_STATE_FLAG:
